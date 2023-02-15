@@ -33,19 +33,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // $title = $request->input('title');
-        // $comment = $request->input('comment');
-
         $post = new Post();
         $post->user_id = Auth::user()->id;
         $post->title = $request->title;
         $post->comment = $request->comment;
         $post->save();
-        // DB::table('posts')->insert([
-        //     'user_id'=> Auth::user()->id,
-        //     'title'=>$title,
-        //     'comment'=>$comment,
-        // ]);
 
         return redirect('/post')->with('success', '投稿しました。');
     }
@@ -55,7 +47,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.show', compact('post'));
     }
 
     /**
