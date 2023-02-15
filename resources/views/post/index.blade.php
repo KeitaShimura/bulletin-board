@@ -19,6 +19,11 @@
           <h5 class="card-title"><a href="{{ route('post.show', $post->id) }}">{{$post->title}}</a></h5>
           <p class="card-text">{{$post->comment}}</p>
           <a href="{{ route('post.edit', $post->id) }}">編集</a>
+          <form method="POST" action="{{ route('post.destroy', $post->id) }}">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">削除</button></td>
+        </form>
         </div>
     @endforeach
       </div>
