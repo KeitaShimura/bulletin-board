@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -29,7 +32,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $title = $request->input('title');
+        // $comment = $request->input('comment');
+
+        $post = new Post();
+        $post->user_id = Auth::user()->id;
+        $post->title = $request->title;
+        $post->comment = $request->comment;
+        $post->save();
+        // DB::table('posts')->insert([
+        //     'user_id'=> Auth::user()->id,
+        //     'title'=>$title,
+        //     'comment'=>$comment,
+        // ]);
+
+        return redirect('/post')->with('success', '投稿しました。');
     }
 
     /**

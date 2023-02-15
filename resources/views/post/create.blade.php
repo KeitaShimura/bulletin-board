@@ -11,11 +11,11 @@
     <form method="POST" action="{{ route('post.store') }}">
         @csrf
         <div class="form-floating">
-            <textarea class="form-control" id="title"></textarea>
+            <input class="form-control" id="title" name="title"></input>
             <label for="title">タイトル</label>
           </div>
           <div class="form-floating">
-            <textarea class="form-control" id="content" style="height: 100px"></textarea>
+            <textarea class="form-control" id="comment" name="comment" style="height: 100px"></textarea>
             <label for="content">内容</label>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
