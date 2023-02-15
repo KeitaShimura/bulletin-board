@@ -56,7 +56,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -64,7 +65,14 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->user_id = Auth::user()->id;
+        $post->title = $request->title;
+        $post->comment = $request->comment;
+        $post->save();
+
+        return back()->with('success', '投稿を更新しました。');
     }
 
     /**
