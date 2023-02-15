@@ -25,6 +25,8 @@
             @method('DELETE')
             <button class="btn btn-danger">削除</button></td>
             @endif
+            <a href="{{ route('comment.create') }}">コメントする</a>
+
         </form>
         </div>
     @endforeach
