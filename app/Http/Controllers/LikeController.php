@@ -29,8 +29,8 @@ class LikeController extends Controller
      */
     public function destroy(string $id)
     {
-        $comment = Like::findOrFail($id);
-        $comment->delete();
+        $like = Like::findOrFail($id);
+        $like->delete();
 
         return redirect()->back()->with('success', 'いいね！を解除しました。');
     }
