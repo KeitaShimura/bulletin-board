@@ -66,7 +66,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Comment::findOrFail($id);
+
+        $post->comment = $request->comment;
+        $post->save();
+
+        return back()->with('success', 'コメントを更新しました。');
     }
 
     /**
