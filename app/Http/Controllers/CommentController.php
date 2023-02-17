@@ -79,6 +79,9 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'コメントを削除しました。');
     }
 }

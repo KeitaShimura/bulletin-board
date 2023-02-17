@@ -24,11 +24,10 @@
             @csrf
             @method('DELETE')
             <button class="btn btn-danger">削除</button></td>
-            @endif
-            <a href="{{ route('comment.create', ['post_id' => $post->id]) }}">コメントする</a>
-
-
         </form>
+        @endif
+        <a href="{{ route('comment.create', ['post_id' => $post->id]) }}">コメントする</a>
+
 
         <form method="POST" action="{{ route('like.store', $post->id) }}">
             @csrf
@@ -41,9 +40,17 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-text">{{ $comment->comment }}</p>
-                    <a href="{{ route('comment.edit', $comment->id) }}">編集</a>
                 </div>
+                @if($comment->user_id == Auth::user()->id)
+                <a href="{{ route('comment.edit', $comment->id) }}">編集</a>
+                <form method="POST" action="{{ route('comment.destroy', $comment->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">削除</button></td>
+                </form>
+                @endif
             </div>
+
         @endforeach
       @endforeach
 
