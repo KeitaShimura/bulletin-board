@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,5 @@ require __DIR__.'/auth.php';
 
 Route::resource('post', PostController::class);
 Route::resource('comment', CommentController::class);
-Route::get('comment/{id}/create', [CommentController::class, 'create']);
-
 Route::resource('like', LikeController::class)->only(['store', 'destroy']);
+Route::resource('user', UserController::class);
