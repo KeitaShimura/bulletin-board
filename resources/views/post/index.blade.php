@@ -27,8 +27,23 @@
         </form>
         @endif
         <a href="{{ route('comment.create', ['post_id' => $post->id]) }}">コメントする</a>
-
-
+        @foreach($post->Like as $like)
+        @if($like->where('user_id', Auth::user()->id)->exists())
+        {{-- @if($like->user_id == Auth::user()->id) --}}
+        <form method="POST" action="{{ route('like.destroy', $like) }}">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-success">いいね済み</button></td>
+        </form>
+        {{-- @endif --}}
+        @else
+        {{-- <form method="POST" action="{{ route('like.store', $post->id) }}">
+            @csrf
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <button class="btn btn-secondary">いいねする</button></td>
+        </form> --}}
+        @endif
+        @endforeach
         <form method="POST" action="{{ route('like.store', $post->id) }}">
             @csrf
             <input type="hidden" name="post_id" value="{{ $post->id }}">

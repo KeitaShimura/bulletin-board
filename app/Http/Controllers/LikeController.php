@@ -17,11 +17,10 @@ class LikeController extends Controller
     {
         $like = new Like();
         $like->user_id = Auth::user()->id;
-        $like->post_id = $$request->post_id;
-
+        $like->post_id = $request->post_id;
         $like->save();
 
-        return redirect('/post');
+        return redirect('/post')->with('success', 'いいね！しました。');
     }
 
     /**
@@ -30,6 +29,9 @@ class LikeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Like::findOrFail($id);
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'いいね！を解除しました。');
     }
 }
