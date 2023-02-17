@@ -35,8 +35,22 @@
             <input type="hidden" name="post_id" value="{{ $post->id }}">
             <button class="btn btn-secondary">いいねする</button></td>
         </form>
-        </div>
-    @endforeach
       </div>
+    </form>
+    @foreach($post->Comment as $comment)
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{ $comment->comment }}</p>
+                    {{-- <p class="card-text">
+                        投稿者:
+                        <a href="{{ route('users.show', $comment->user->id) }}">
+                            {{ $comment->user->name }}
+                        </a>
+                    </p> --}}
+                </div>
+            </div>
+        @endforeach
+      @endforeach
+
 </body>
 </html>
