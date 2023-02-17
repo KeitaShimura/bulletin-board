@@ -41,12 +41,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-text">{{ $comment->comment }}</p>
-                    {{-- <p class="card-text">
-                        投稿者:
-                        <a href="{{ route('users.show', $comment->user->id) }}">
-                            {{ $comment->user->name }}
-                        </a>
-                    </p> --}}
+                    <a href="{{ route('comment.edit', $comment->id) }}">編集</a>
                 </div>
             </div>
         @endforeach
