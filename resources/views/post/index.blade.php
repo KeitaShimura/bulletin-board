@@ -25,8 +25,15 @@
             @method('DELETE')
             <button class="btn btn-danger">削除</button></td>
             @endif
-            <a href="{{ route('comment.create') }}">コメントする</a>
+            <a href="{{ route('comment.create', ['post_id' => $post->id]) }}">コメントする</a>
 
+
+        </form>
+
+        <form method="POST" action="{{ route('like.store', $post->id) }}">
+            @csrf
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <button class="btn btn-secondary">いいねする</button></td>
         </form>
         </div>
     @endforeach
