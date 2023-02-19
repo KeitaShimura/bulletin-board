@@ -11,6 +11,6 @@ class Like extends Model
 
     public function Post()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

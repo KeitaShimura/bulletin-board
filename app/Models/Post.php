@@ -36,4 +36,9 @@ class Post extends Model
             return false;
         }
     }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
