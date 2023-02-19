@@ -12,7 +12,9 @@
 
 <body>
     <div style="width: 48rem; margin: 0 auto; margin-top: 30px;">
-
+        @error('comment')
+            <div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
+        @enderror
         <form method="POST" action="{{ route('comment.store') }}">
             @csrf
             <div class="form-floating"style="margin-bottom: 10px;">

@@ -12,7 +12,12 @@
 
 <body>
     <div style="width: 48rem; margin: 0 auto; margin-top: 30px;">
-
+        @error('title')
+            <div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
+        @enderror
+        @error('comment')
+            <div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
+        @enderror
         <form method="POST" action="{{ route('post.store') }}">
             @csrf
             <div class="form-floating" style="margin-bottom: 10px;">
@@ -28,7 +33,7 @@
             </div>
         </form>
         <div style="text-align: center; margin-top:10px;">
-            <a href="{{ route('post.index')}}" class="btn btn-secondary">戻る</a>
+            <a href="{{ route('post.index') }}" class="btn btn-secondary">戻る</a>
         </div>
     </div>
 </body>

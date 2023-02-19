@@ -11,11 +11,13 @@
 </head>
 
 <body>
-    @if (session()->has('success'))
-        <div class="alert alert-success" style="text-align: center;">{{ session()->get('success') }}</div>
-    @endif
     <div style="width: 48rem; margin: 0 auto; margin-top: 30px;">
-
+        @if (session()->has('success'))
+            <div class="alert alert-success" style="text-align: center;">{{ session()->get('success') }}</div>
+        @endif
+        @error('comment')
+            <div class="alert alert-danger" style="text-align: center;">{{ $message }}</div>
+        @enderror
         <form method="POST" action="/comment/{{ $comment->id }}">
             @csrf
             @method('PATCH')
@@ -28,8 +30,8 @@
             </div>
         </form>
         <div style="text-align: center; margin-top:10px;">
-        <a href="{{ route('post.index')}}" class="btn btn-secondary">戻る</a>
-    </div>
+            <a href="{{ route('post.index') }}" class="btn btn-secondary">戻る</a>
+        </div>
     </div>
 </body>
 
