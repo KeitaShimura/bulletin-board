@@ -35,6 +35,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('post', PostController::class);
-Route::resource('comment', CommentController::class);
+Route::resource('comment', CommentController::class)->except(['index', 'show']);
 Route::resource('like', LikeController::class)->only(['store', 'destroy']);
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->only(['show', 'edit', 'update']);
