@@ -25,7 +25,7 @@ class Post extends Model
         $id = Auth::user()->id;
 
         $likers = array();
-        
+
         foreach ($this->Like as $like) {
             array_push($likers, $like->user_id);
         }
