@@ -11,86 +11,81 @@
 </head>
 
 <body>
+    @include('layouts.header')
     <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <h1 style="color: white; font-size: 30px;">Laravel掲示板</h1>
-                <a href="{{ route('user.show', Auth::user()->id) }}"
-                    style="color: white;  text-decoration-line: none;">プロフィール</a>
-            </div>
-        </nav>
         @if (session()->has('success'))
             <div class="alert alert-success" style="text-align: center;">{{ session()->get('success') }}</div>
         @endif
         <div style="margin: 10px; text-align:center;">
-            <a class="btn btn-primary" href="{{ route('post.create') }}"
-                style="font-size: 20px;">投稿フォーム</a>
+            <a class="btn btn-primary" href="{{ route('post.create') }}" style="font-size: 20px;">投稿フォーム</a>
         </div>
 
-        @foreach ($posts as $post)
-        <div style="margin: 20px;">
-            <div class="card" style="width: 48rem; margin: 0 auto;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $post->User->name }}</h5>
-                    <h5 class="card-title"><a href="{{ route('post.show', $post->id) }}"
-                            style="color: black; text-decoration-line: none;">{{ $post->title }}</a></h5>
-                    <p class="card-text">{{ $post->comment }}</p>
-                    <div style="display:flex;">
-                        <a href="{{ route('comment.create', ['post_id' => $post->id]) }}"
-                            style="text-decoration-line: none;">コメントする</a>
+        <div>
+            @foreach ($posts as $post)
+                <div class="card" style="width: 80%; margin: 0 auto;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $post->User->name }}</h5>
+                        <h5 class="card-title"><a href="{{ route('post.show', $post->id) }}"
+                                style="color: black; text-decoration-line: none;">{{ $post->title }}</a></h5>
+                        <p class="card-text">{{ $post->comment }}</p>
+                        <div style="display:flex;">
+                            <a href="{{ route('comment.create', ['post_id' => $post->id]) }}"
+                                style="text-decoration-line: none; margin: 7px;">コメントする</a>
 
-                        @if ($post->is_liked_by_auth_user())
-                            @foreach ($post->Like as $like)
-                                @if ($like->user_id == Auth::user()->id)
-                                    <form method="POST" action="{{ route('like.destroy', $like->id) }}">
+                            @if ($post->is_liked_by_auth_user())
+                                @foreach ($post->Like as $like)
+                                    @if ($like->user_id == Auth::user()->id)
+                                        <form method="POST" action="{{ route('like.destroy', $like->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-success">いいね済み</button>
+                                        </form>
+                                    @endif
+                                @endforeach
+                            @else
+                                <form method="POST" action="{{ route('like.store', $post->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <button class="btn btn-secondary">いいねする</button></td>
+                                </form>
+                            @endif
+                            @if ($post->user_id == Auth::user()->id)
+                                <div style="margin: 0 0 0 auto;">
+                                    <form method="POST" action="{{ route('post.destroy', $post->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-success">いいね済み</button></td>
+                                        <a href="{{ route('post.edit', $post->id) }}"
+                                            style="text-decoration-line: none;">編集</a>
+                                        <button style="color: red; border: none; background: transparent;">削除</button>
+                                        </td>
                                     </form>
-                                @endif
-                            @endforeach
-                        @else
-                            <form method="POST" action="{{ route('like.store', $post->id) }}">
-                                @csrf
-                                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                <button class="btn btn-secondary">いいねする</button></td>
-                            </form>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @foreach ($post->Comment as $comment)
+                    <div class="card" style="width: 80%; margin: 0 auto;">
+                        <div class="card-body">
+                            <p class="card-text">{{ $comment->User->name }}</p>
+                            <p class="card-text">{{ $comment->comment }}</p>
+                        </div>
+                        @if ($comment->user_id == Auth::user()->id)
+                            <div style="display: flex; justify-content: flex-end; margin: 15px;">
+                                <form method="POST" action="{{ route('comment.destroy', $comment->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('comment.edit', $comment->id) }}"
+                                        style="text-decoration-line: none;">編集</a>
+                                    <button style="color: red; border: none; background: transparent;">削除</button>
+                                </form>
+                            </div>
                         @endif
                     </div>
-                    @if ($post->user_id == Auth::user()->id)
-                        <div style="display:flex;">
-                            <a href="{{ route('post.edit', $post->id) }}" style="text-decoration-line: none;">編集</a>
-                            <form method="POST" action="{{ route('post.destroy', $post->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button style="color: red; border: none; background: transparent;">削除</button></td>
-                            </form>
-                        </div>
-                    @endif
-                </div>
-            </div>
-            @foreach ($post->Comment as $comment)
-            <div class="card" style="width: 40rem; margin: 0 auto;            ">
-                <div class="card-body">
-                        <p class="card-text">{{ $comment->User->name }}</p>
-                        <p class="card-text">{{ $comment->comment }}</p>
-                    </div>
-                    @if ($comment->user_id == Auth::user()->id)
-                        <div style="display: flex;">
-                            <a href="{{ route('comment.edit', $comment->id) }}"
-                                style="text-decoration-line: none;">編集</a>
-                            <form method="POST" action="{{ route('comment.destroy', $comment->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button style="color: red; border: none; background: transparent;">削除</button>
-                            </form>
-                        </div>
-                    @endif
-                </div>
+                @endforeach
+                <div style="height: 20px;"></div>
             @endforeach
-        @endforeach
-    </div>
-
+        </div>
 </body>
 
 </html>

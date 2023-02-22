@@ -23,7 +23,7 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'string|required|max:30',
-            'comment' => 'string|required|max:100'
+            'comment' => 'string|required|max:300'
         ];
     }
 }

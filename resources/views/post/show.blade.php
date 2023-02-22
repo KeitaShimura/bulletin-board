@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <div style="margin: 20px;">
-        <div class="card" style="width: 48rem; margin: 0 auto;">
+    @include('layouts.header')
+    <div style="margin-top: 20px;">
+        <div class="card" style="width: 80%; margin: 0 auto;">
             <div class="card-body">
                 <h5 class="card-title">{{ $post->User->name }}</a></h5>
                 <h5 class="card-title">{{ $post->title }}</a></h5>
@@ -21,7 +22,7 @@
         </div>
     </div>
     <div style="text-align: center; margin-top:10px;">
-        <a href="{{ route('post.index')}}" class="btn btn-secondary">戻る</a>
+        <a href="{{ route('post.index') }}" class="btn btn-secondary">戻る</a>
     </div>
 </body>
 

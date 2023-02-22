@@ -11,11 +11,12 @@
 </head>
 
 <body>
+    @include('layouts.header')
     @if (session()->has('success'))
         <div class="alert alert-success" style="text-align: center;">{{ session()->get('success') }}</div>
     @endif
-    <div style="margin: 20px;">
-        <div class="card" style="width: 48rem; margin: 0 auto;">
+    <div style="margin-top: 20px;">
+        <div class="card" style="width: 80%; margin: 0 auto;">
             <div class="card-body">
                 <h5 class="card-title">{{ $user->name }}</a></h5>
                 <p class="card-text">{{ $user->email }}</p>
@@ -23,7 +24,7 @@
             </div>
         </div>
         <div style="text-align: center; margin-top:10px;">
-            <a href="{{ route('post.index')}}" class="btn btn-secondary">戻る</a>
+            <a href="{{ route('post.index') }}" class="btn btn-secondary">戻る</a>
         </div>
     </div>
 </body>

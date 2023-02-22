@@ -22,7 +22,7 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => 'string|required|max:100'
+            'comment' => 'string|required|max:300'
         ];
     }
 }

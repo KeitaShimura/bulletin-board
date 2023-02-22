@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <div style="width: 48rem; margin: 0 auto; margin-top: 30px;">
+    @include('layouts.header')
+    <div style="width: 80%; margin: 0 auto; margin-top: 30px;">
         @if (session()->has('success'))
             <div class="alert alert-success" style="text-align: center;">{{ session()->get('success') }}</div>
         @endif
