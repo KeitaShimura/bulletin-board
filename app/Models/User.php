@@ -44,11 +44,16 @@ class User extends Authenticatable
 
     public function Post()
     {
-        return $this->hasOne(Post::class);
+        return $this->hasMany(Post::class);
     }
 
     public function Comment()
     {
-        return $this->hasOne(Comment::class);
+        return $this->hasMany(Comment::class);
+    }
+
+    public function Like()
+    {
+        return $this->hasMany(Like::class);
     }
 }
