@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 @foreach ($post->Comment as $comment)
-                    <div class="card" style="width: 80%; margin: 0 auto;">
+                    <div class="card" style="width: 60%; margin: 0 auto;">
                         <div class="card-body">
                             <p class="card-text">{{ $comment->User->name }}</p>
                             <p class="card-text">{{ $comment->comment }}</p>
