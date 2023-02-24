@@ -3,9 +3,6 @@
         <h1 style="color: white; font-size: 30px;">Laravel掲示板</h1>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/" style="color: white; text-decoration-line: none;">メイン画面</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="/dashboard" style="color: white;  text-decoration-line: none;">ダッシュボード</a>
     </li>
     <li class="nav-item">
