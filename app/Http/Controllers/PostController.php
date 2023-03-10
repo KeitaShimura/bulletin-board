@@ -82,6 +82,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+        $post->comment()->delete();
+        $post->like()->delete();
+
 
         return redirect()->back()->with('success', '投稿を削除しました。');
     }
